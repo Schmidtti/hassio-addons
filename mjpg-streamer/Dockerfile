@@ -10,8 +10,8 @@ RUN echo "Install base requirements." \
     && apk add --no-cache --virtual .build-dependencies-mjpgstreamer make cmake build-base linux-headers libjpeg-turbo-dev libgphoto2-dev libjpeg8-dev gcc g++ \
     && wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz -C /tmp \
     && cd /tmp/mjpg-streamer-master/mjpg-streamer-experimental/ \
-    && make --silent \
-    && make install --silent \
+    && make \
+    && make install \
     && mv www/ /www_mjpg \
         && export LD_LIBRARY_PATH=/mjpg_streamer -o "output_http.so -w ./www_mjpg" -i "input_raspicam.so"
     && rm -rf /tmp/mjpg-streamer-master \
