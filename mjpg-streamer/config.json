@@ -4,7 +4,7 @@
     "slug": "mjpg-streamer",
     "description": "mjpg-streamer add-on for Home Assistant",
     "arch": ["armv7", "amd64", "armhf", "aarch64", "i386"],
-    "url": "https://github.com/fredrikbaberg/hassio-addons",
+    "url": "https://github.com/Schmidtti/hassio-addons",
     "boot": "manual",
     "ports": {
         "8000/tcp": null
@@ -16,7 +16,7 @@
     "video": true,
     "usb": true,
     "options": {
-        "mjpg_input": "input_uvc.so -n"
+        "mjpg_input": "input_raspicam.so"
     },
     "schema": {
         "mjpg_input": "str"
