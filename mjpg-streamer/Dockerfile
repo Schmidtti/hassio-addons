@@ -7,13 +7,14 @@ ENV LANG C.UTF-8
 RUN echo "Install base requirements." \
     && apk add --no-cache --virtual .necessary-mjpeg-streamer libjpeg tinyproxy libgphoto2 \
     && echo "Install mjpg-streamer." \
-    && apk add --no-cache --virtual .build-dependencies-mjpgstreamer make cmake build-base linux-headers libjpeg-turbo-dev libgphoto2-dev \
+    && apk add --no-cache --virtual .build-dependencies-mjpgstreamer make cmake build-base linux-headers libjpeg-turbo-dev libgphoto2-dev libjpeg8-dev gcc g++ \
     && wget -qO- https://github.com/jacksonliam/mjpg-streamer/archive/master.tar.gz | tar xz -C /tmp \
     && cd /tmp/mjpg-streamer-master/mjpg-streamer-experimental/ \
     && make --silent \
     && make install --silent \
     && mv www/ /www_mjpg \
     && rm -rf /tmp/mjpg-streamer-master \
-    && apk del --no-cache .build-dependencies-mjpgstreamer
+    && apk del --no-cache .build-dependencies-mjpgstreamer \
+    && export LD_LIBRARY_PATH=/mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so"
 COPY rootfs/ /
 WORKDIR /
