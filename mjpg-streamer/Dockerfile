@@ -12,9 +12,9 @@ RUN echo "Install base requirements." \
     && cd /tmp/mjpg-streamer-master/mjpg-streamer-experimental/ \
     && make --silent \
     && make install --silent \
+    && export LD_LIBRARY_PATH=/mjpg_streamer -i "input_raspicam.so" -o "output_http.so"
     && mv www/ /www_mjpg \
     && rm -rf /tmp/mjpg-streamer-master \
     && apk del --no-cache .build-dependencies-mjpgstreamer \
-    && export LD_LIBRARY_PATH=/mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so"
 COPY rootfs/ /
 WORKDIR /
